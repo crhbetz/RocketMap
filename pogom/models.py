@@ -2809,7 +2809,7 @@ def clean_db_loop(args):
                 query = (Weather
                          .delete()
                          .where((Weather.last_updated <
-                                 (datetime.utcnow() - timedelta(minutes=15)))))
+                                 (datetime.utcnow() - timedelta(minutes=70)))))
                 query.execute()
 
                 # Remove expired HashKeys
