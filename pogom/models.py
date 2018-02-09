@@ -30,7 +30,8 @@ from .utils import (get_pokemon_name, get_pokemon_types,
 from .transform import transform_from_wgs_to_gcj, get_new_coords
 from .customLog import printPokemon
 
-from .account import check_login, setup_api, pokestop_spinnable, spin_pokestop
+from .account import (check_login, setup_api, pokestop_spinnable, spin_pokestop,
+                      pokestop_lurable, place_lure)
 from .proxy import get_new_proxy
 from .apiRequests import encounter
 
@@ -2217,7 +2218,12 @@ def parse_map(args, map_dict, scan_coords, scan_location, db_update_queue,
                             })
                             wh_update_queue.put(('raid', wh_raid))
 
-        # Let db do it's things while we try to spin.
+        # Let db do it's things while we try to spin and/or lure.
+        if args.lure_party:
+            for f in forts:
+                if f.type == 1 and pokestop_lurable(f, scan_coords):
+                    place_lure(api, account, args, f, scan_coords)
+ 
         if args.pokestop_spinning:
             for f in forts:
                 # Spin Pokestop with 50% chance.

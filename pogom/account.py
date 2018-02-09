@@ -16,7 +16,8 @@ from .utils import in_radius, generate_device_info, distance
 from .proxy import get_new_proxy
 from .apiRequests import (send_generic_request, fort_details,
                           recycle_inventory_item, use_item_egg_incubator,
-                          release_pokemon, level_up_rewards, fort_search)
+                          release_pokemon, level_up_rewards, fort_search,
+                          add_fort_modifier)
 
 log = logging.getLogger(__name__)
 
@@ -333,6 +334,9 @@ def rpc_login_sequence(args, api, account):
     log.info('RPC login sequence for account %s successful with %s requests.',
              account['username'],
              total_req)
+    log.info('Account %s at Level %s has the following items: %s', 
+             account['username'], account['level'], account['items'])
+    log.info('Should just have seen the account.')
 
     time.sleep(random.uniform(3, 5))
 
@@ -483,6 +487,33 @@ def pokestop_spinnable(fort, step_location):
     pause_needed = fort.cooldown_complete_timestamp_ms / 1000 > now
     return in_range and not pause_needed
 
+
+def pokestop_lurable(fort, step_location):
+    if not fort.enabled:
+        return False
+
+    fort_radius = 38
+    in_range = in_radius((fort.latitude, fort.longitude),
+                         step_location, fort_radius)
+    return in_range
+
+
+def place_lure(api, account, args, fort, step_location):
+    if not pokestop_lurable(fort, step_location):
+        log.warning('Account %s could not lure Pokestop',
+                    account['username'])
+        return False
+    time.sleep(random.uniform(0.8, 1.8))
+    fort_details(api, account, fort)
+    time.sleep(random.uniform(0.8, 1.8))  # Don't let Niantic throttle.
+    response = add_fort_modifier(api, account, fort, step_location, 501)
+    time.sleep(random.uniform(2, 4))  # Don't let Niantic throttle.
+
+    lure_result = response['responses']['ADD_FORT_MODIFIER'].result
+    log.info('Result of place_lure with account %s: %s',
+             account['username'], lure_result)
+    return True
+   
 
 def spin_pokestop(api, account, args, fort, step_location):
     if not can_spin(account, args.account_max_spins):

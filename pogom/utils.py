@@ -315,6 +315,9 @@ def get_args():
     parser.add_argument('-spin', '--pokestop-spinning',
                         help=('Spin Pokestops with 50%% probability.'),
                         action='store_true', default=False)
+    parser.add_argument('-lure', '--lure-party',
+                        help=('Place all the lures!'),
+                        action='store_true', default=False)
     parser.add_argument('-ams', '--account-max-spins',
                         help='Maximum number of Pokestop spins per hour.',
                         type=int, default=20)

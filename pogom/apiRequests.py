@@ -183,6 +183,17 @@ def fort_search(api, account, fort, step_location):
     return send_generic_request(req, account)
 
 
+@catchRequestException('placing a lure')
+def add_fort_modifier(api, account, fort, step_location, modifier):
+    req = api.create_request()
+    req.add_fort_modifier(
+        fort_id=fort.id,
+        modifier_type=501,
+        player_latitude=step_location[0],
+        player_longitude=step_location[1])
+    return send_generic_request(req, account)
+
+
 @catchRequestException('getting Pokestop details')
 def fort_details(api, account, fort):
     req = api.create_request()
