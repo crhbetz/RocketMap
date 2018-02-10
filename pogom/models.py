@@ -2326,20 +2326,21 @@ def encounter_pokemon(args, pokemon, account, api, account_sets, status,
     pokemon_id = None
     result = False
     try:
-        hlvl_api = None
-        pokemon_id = pokemon.pokemon_data.pokemon_id
-        scan_location = [pokemon.latitude, pokemon.longitude]
-        # If the host has L30s in the regular account pool, we
-        # can just use the current account.
-        if account['level'] >= 30:
-            hlvl_account = account
-            hlvl_api = api
-        else:
-            # Get account to use for IV and CP scanning.
-            hlvl_account = account_sets.next('30', scan_location)
-            using_accountset = True
+        while not hlvl_account:
+            hlvl_api = None
+            pokemon_id = pokemon.pokemon_data.pokemon_id
+            scan_location = [pokemon.latitude, pokemon.longitude]
+            # If the host has L30s in the regular account pool, we
+            # can just use the current account.
+            if account['level'] >= 30:
+                hlvl_account = account
+                hlvl_api = api
+            else:
+                # Get account to use for IV and CP scanning.
+                hlvl_account = account_sets.next('30', scan_location)
+                using_accountset = True
 
-        time.sleep(args.encounter_delay)
+            time.sleep(args.encounter_delay)
 
         # If we didn't get an account, we can't encounter.
         if not hlvl_account:
