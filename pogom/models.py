@@ -34,6 +34,7 @@ from .customLog import printPokemon
 from .account import check_login, setup_api, pokestop_spinnable, spin_pokestop
 from .proxy import get_new_proxy
 from .apiRequests import encounter
+from .scout import encounter_pokemon_scout
 
 from pgoapi.protos.pogoprotos.map.weather.weather_alert_pb2 import WeatherAlert
 from pgoapi.protos.pogoprotos.networking.responses \
@@ -2154,7 +2155,7 @@ def parse_map(args, map_dict, scan_coords, scan_location, db_update_queue,
             # Scan for IVs/CP and moves.
             pokemon_info = False
             if args.encounter and (pokemon_id in args.enc_whitelist):
-                pokemon_info = encounter_pokemon(
+                pokemon_info = encounter_pokemon_scout(
                     args, p, account, api, account_sets, status, key_scheduler)
 
             pokemon[p.encounter_id] = {
