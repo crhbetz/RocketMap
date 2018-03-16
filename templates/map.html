@@ -2,11 +2,11 @@
 <html lang="{{lang}}">
   <head>
     <meta charset="utf-8">
-    <title>RocketMap</title>
+    <title>PoGoAN Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="PokeMap">
+    <meta name="apple-mobile-web-app-title" content="PoGoAN Map">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#3b3b3b">
     <!-- Fav- & Apple-Touch-Icons -->
@@ -44,7 +44,7 @@
       <!-- Header -->
       <header id="header">
         <a href="#nav"><span class="label">Options</span></a>
-        <h1><a href="./">RocketMap<img class='rocket icon' src='static/images/rocket.png'></a></h1>
+        <h1><a href="https://pogoan.de">PoGoAN.de<a/></h1>
         <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span class="label">Stats</span></a>
         <a href="status" target="_blank" style="float: right;"><span class="label">Status</span></a>
         <span id="weatherInfo" style="float: right; vertical-align: middle;"></span>
@@ -258,7 +258,7 @@
                 <option value="5">Ultra Rare and below</option>
               </select>
             </div>
-                  {% if show.encounter %}
+<!--                  {% if show.encounter %} -->
             <div class="form-control switch-container">
               <h3>Pokémon Stats</h3>
               <div class="onoffswitch">
@@ -269,7 +269,7 @@
                 </label>
               </div>
             </div>
-                  {% endif %}
+<!--                  {% endif %}i -->
               {% endif %}
               {% if show.weather_cells %}
             <div class="form-control switch-container">
@@ -402,7 +402,7 @@
               </label>
             </div>
 
-              {% if show.encounter %}
+<!--              {% if show.encounter %} -->
             <div id="notify-perfection-wrapper" style="display:none">
               <div class="form-control">
                 <label for="notify-perfection">
@@ -417,7 +417,7 @@
                 <input id="notify-level" type="text" name="notify-level" placeholder="Minimum level"/>
               </label>
             </div>
-              {% endif %}
+<!--              {% endif %} -->
             <div class="form-control switch-container">
               <h3>Notify with sound</h3>
               <div class="onoffswitch">
