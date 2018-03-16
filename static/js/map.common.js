@@ -855,7 +855,7 @@ var StoreOptions = {
         type: StoreTypes.JSON
     },
     'remember_select_notify': {
-        default: [],
+        default: [386],
         type: StoreTypes.JSON
     },
     'remember_select_rarity_notify': {
@@ -863,7 +863,7 @@ var StoreOptions = {
         type: StoreTypes.JSON
     },
     'remember_text_perfection_notify': {
-        default: '',
+        default: '90',
         type: StoreTypes.Number
     },
     'remember_text_level_notify': {
@@ -875,7 +875,7 @@ var StoreOptions = {
         type: StoreTypes.Number
     },
     'showRaids': {
-        default: false,
+        default: true,
         type: StoreTypes.Boolean
     },
     'showParkRaidsOnly': {
@@ -895,11 +895,11 @@ var StoreOptions = {
         type: StoreTypes.Number
     },
     'showGyms': {
-        default: false,
+        default: true,
         type: StoreTypes.Boolean
     },
     'useGymSidebar': {
-        default: false,
+        default: true,
         type: StoreTypes.Boolean
     },
     'showParkGymsOnly': {
@@ -939,7 +939,7 @@ var StoreOptions = {
         type: StoreTypes.Boolean
     },
     'showLuredPokestopsOnly': {
-        default: 0,
+        default: 1,
         type: StoreTypes.Number
     },
     'showScanned': {
